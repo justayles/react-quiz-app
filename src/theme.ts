@@ -1,0 +1,45 @@
+export const colors = {
+  bg: '#0c0f14',
+  bgElevated: '#141922',
+  card: '#1a2130',
+  cardBorder: '#2c3548',
+  text: '#f3f5f8',
+  textMuted: '#93a0b5',
+  textDim: '#6d7b90',
+  accent: '#f0b429',
+  accentPressed: '#d9a01f',
+  accentText: '#1c1404',
+  correct: '#3dcc8a',
+  correctBg: '#123024',
+  correctBorder: '#1f7a52',
+  wrong: '#ff6b6b',
+  wrongBg: '#3a1820',
+  wrongBorder: '#a33b45',
+  codeBg: '#090c11',
+  codeText: '#d7deea',
+  keyword: '#c792ea',
+  string: '#c3e88d',
+  comment: '#637784',
+  number: '#f78c6c',
+  tag: '#89ddff',
+  chip: '#232b3b',
+  chipText: '#d5dbe6',
+  rememberBg: '#2a220f',
+  rememberBorder: '#8a6a1d',
+  versionBg: '#142033',
+  versionBorder: '#2d4d73',
+};
+
+export const space = {
+  xs: 6,
+  sm: 10,
+  md: 16,
+  lg: 22,
+  xl: 28,
+};
+
+export const radius = {
+  sm: 8,
+  md: 14,
+  lg: 20,
+};
