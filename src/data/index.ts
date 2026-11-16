@@ -1,11 +1,19 @@
 import type { Question } from './types';
 import { javascriptQuestions } from './questions/javascript';
+import { jsConceptsA } from './questions/js-concepts-a';
+import { jsConceptsB } from './questions/js-concepts-b';
+import { jsConceptsC } from './questions/js-concepts-c';
+import { jsConceptsD } from './questions/js-concepts-d';
+import { jsConceptsE } from './questions/js-concepts-e';
+import { jsConceptsF } from './questions/js-concepts-f';
 import { next15aQuestions } from './questions/next15a';
 import { next15bQuestions } from './questions/next15b';
+import { next15BlueprintQuestions, next16BlueprintQuestions } from './questions/blueprint-next';
 import { next16aQuestions } from './questions/next16a';
 import { next16bQuestions } from './questions/next16b';
 import { react19aQuestions } from './questions/react19a';
 import { react19bQuestions } from './questions/react19b';
+import { react19cQuestions } from './questions/react19c';
 import { typescriptQuestions } from './questions/typescript';
 import { nodeQuestions } from './questions/node';
 import { playwrightQuestions } from './questions/playwright';
@@ -17,11 +25,20 @@ import { sqlQuestions } from './questions/sql';
 
 export const allQuestions: Question[] = [
   ...javascriptQuestions,
+  ...jsConceptsA,
+  ...jsConceptsB,
+  ...jsConceptsC,
+  ...jsConceptsD,
+  ...jsConceptsE,
+  ...jsConceptsF,
   ...typescriptQuestions,
   ...react19aQuestions,
   ...react19bQuestions,
+  ...react19cQuestions,
   ...next15aQuestions,
   ...next15bQuestions,
+  ...next15BlueprintQuestions,
+  ...next16BlueprintQuestions,
   ...next16aQuestions,
   ...next16bQuestions,
   ...nodeQuestions,

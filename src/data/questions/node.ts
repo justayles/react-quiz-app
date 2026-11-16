@@ -1644,4 +1644,39 @@ export const nodeQuestions = [
       remember: 'Listen for error on a Worker, or an uncaught exception in the thread can crash the main process.',
     },
   },
+  {
+    id: 'node-041',
+    tech: 'node',
+    topic: 'event-loop',
+    kind: 'concept',
+    difficulty: 'expert',
+    prompt: 'An I/O callback is running in the poll phase and it schedules setImmediate and setTimeout of 0. Which callback runs next, and where does process.nextTick sit?',
+    options: [
+      'setImmediate runs next, in the check phase, before the timers phase sees the new timeout. nextTick and then promise microtasks run before the loop continues.',
+      'setTimeout runs next because a delay of 0 is due immediately, and nextTick waits until the close phase.',
+      'Both timers run before the I/O callback finishes, because phases can interrupt the current stack.',
+      'nextTick is the poll phase. setImmediate is a timers-phase alias of setTimeout.',
+    ],
+    correctIndex: 0,
+    explanation: {
+      answer: 'From a poll callback, the check phase runs setImmediate before the next timers phase runs the new setTimeout. nextTick drains before promise microtasks, and neither is a phase.',
+      why: 'The Node loop walks timers, pending callbacks, idle and prepare, poll, check, and close callbacks. The file callback is poll. setImmediate schedules the check phase, which is the next phase, so that callback runs before the loop comes back around to timers for the setTimeout. Scheduled from the top level, the order of those two is not stable, because the loop may enter timers or poll first depending on timing. process.nextTick is a queue beside the phases. After the current operation, Node drains nextTick callbacks and then promise microtasks before it continues the loop. Adding nextTick callbacks forever can starve the phases. Timers cannot interrupt the stack that is already running. The I/O callback finishes, the extra queues drain, and then check runs.',
+      wrong: [
+        {
+          option: 'setTimeout runs next because a delay of 0 is due immediately, and nextTick waits until the close phase.',
+          reason: 'A zero delay still waits for the timers phase. From poll, check comes first. nextTick is not the close phase.',
+        },
+        {
+          option: 'Both timers run before the I/O callback finishes, because phases can interrupt the current stack.',
+          reason: 'The current callback runs to completion. The scheduled callbacks are later turns of the loop.',
+        },
+        {
+          option: 'nextTick is the poll phase. setImmediate is a timers-phase alias of setTimeout.',
+          reason: 'Poll is I/O. setImmediate is check, setTimeout is timers, and nextTick is a queue outside the phase list.',
+        },
+      ],
+      example: { lang: 'js', source: "const fs = require('node:fs');\n\nfs.readFile(__filename, () => {\n  setTimeout(() => console.log('timeout'), 0);\n  setImmediate(() => console.log('immediate'));\n  process.nextTick(() => console.log('nextTick'));\n  Promise.resolve().then(() => console.log('promise'));\n});" },
+      remember: 'After poll, nextTick and promises drain, then check runs setImmediate before the next timers phase.',
+    },
+  },
 ] satisfies Question[];
